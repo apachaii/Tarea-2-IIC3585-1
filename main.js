@@ -12,10 +12,13 @@
     cambia_psicion[0] = 100;
     cambia_psicion[1] = 250;
     cambia_psicion[2]= 400;
-
+    let playButton = document.getElementById("play"); 
     let otro=  document.getElementById("otro")
     let ia = document.getElementById("ia")
-
+    let myaudio = document.getElementById("myaudio");
+    let punto = 0
+    let dddd = document.getElementById("puntos")
+    dddd.innerText = punto
     function myFunction() {
 
          doMove()
@@ -46,6 +49,51 @@
 }
 
 
+
+  
+  playButton.addEventListener("click",function(){
+     myaudio.play();
+     let px = 0
+     let px2 = 0
+     ia.src  = "azul.png"
+     otro.src = "verde.png";
+
+     window.addEventListener('keypress', function(e){
+      let letra = e.key;
+
+      if(letra === "z"){
+        
+        let dd = ia.style.marginTop
+        console.log()
+        if(parseInt(dd) > 560 && parseInt(dd) < 650){
+           punto = punto+1
+           dddd.innerText = punto
+          console.log(punto)
+        }
+      }
+       
+     });
+   
+     // setInterval('myFunction()',500)
+    myFunction()
+    myFunction2()
+    let py2 = 0
+   
+    setInterval(()=>{
+       py2 = px2++
+      ia.style.marginTop =  py2+"px";
+   
+     if(py2 === 640 ){
+       myFunction()
+       ia.style.marginTop =  0+"px";
+      px2 = 0
+      py2 = 0
+     }
+    },10)
+  }); 
+
+
+
 function bajara(n){
   return n-1;
 }
@@ -53,27 +101,7 @@ function bajara(n){
 
 window.onload = (event) => {
 
-  let px = 0
-  let px2 = 0
-  ia.src  = "azul.png"
-  otro.src = "verde.png";
 
-  // setInterval('myFunction()',500)
- myFunction()
- myFunction2()
- let py2 = 0
-
- setInterval(()=>{
-    py2 = px2++
-   ia.style.marginTop =  py2+"px";
-
-  if(py2 === 640 ){
-    myFunction()
-    ia.style.marginTop =  0+"px";
-   px2 = 0
-   py2 = 0
-  }
- },10)
 
 //  setInterval(()=>{
 //   py = px++
