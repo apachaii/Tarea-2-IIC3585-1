@@ -44,7 +44,7 @@
   function doMove2() {
 
     otro.style.marginLeft =cambia_psicion[rand(3)]+"px";
-    otro.style.marginRight = cambia_psicion[rand(3)]+"px";
+    // otro.style.marginRight = cambia_psicion[rand(3)]+"px";
 
 }
 
@@ -67,9 +67,13 @@
         console.log()
         if(parseInt(dd) > 560 && parseInt(dd) < 650){
            punto = punto+1
-           dddd.innerText = punto
+           
           console.log(punto)
         }
+        else{
+          punto = punto-1
+        }
+        dddd.innerText = punto
       }
        
      });
