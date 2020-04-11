@@ -1,60 +1,89 @@
+.juego {
+    width: 100%;
+    border: 1px solid black;
+}
 
-.juego{
-    width:1500px;
-    height: 300px;
-     border:1px solid #000000;
-}
-.puntaje{
-    width:900px;
+.canal {
     height: 100px;
-     border:1px solid #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.cuadrado1{
+
+.silueta_cuadrado {
+    margin-left: 90%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display: block;
+    border: 1px solid black;
+}
+
+.linea_guia {
+    height: 1px;
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background-color: black;
+}
+
+.puntaje {
+    width: 900px;
+    height: 100px;
+    border: 1px solid black;
+}
+
+/*
+.cuadrado1 {
     margin-top: -320px;
     margin-left: 1300px;
-    position: absolute ; 
-    width:50px;
+    position: absolute;
+    width: 50px;
     height: 50px;
-    display:block;
-    border:1px solid #000000;
+    display: block;
+    border: 1px solid #000000;
 }
-.cuadrado2{
+
+.cuadrado2 {
     margin-top: -420px;
     margin-left: 1300px;
-    position: absolute ; 
-    width:50px;
+    position: absolute;
+    width: 50px;
     height: 50px;
-    display:block;
-    border:1px solid #000000;
+    display: block;
+    border: 1px solid #000000;
 }
-.cuadrado3{
+
+.cuadrado3 {
     margin-top: -520px;
     margin-left: 1300px;
-    position: absolute ; 
-    width:50px;
+    position: absolute;
+    width: 50px;
     height: 50px;
-    display:block;
-    border:1px solid #000000;
-}
-.di{
+    display: block;
+    border: 1px solid #000000;
+}*/
 
-        margin-top: 47px;
-        width: 100px;
-        height: 50px;
-        font-weight: bold;
-        position: absolute;
-        animation: mymove 10s ;
-        animation-iteration-count:infinite;
+.di {
+
+    margin-top: 47px;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    position: absolute;
+    animation: mymove 10s;
+    animation-iteration-count: infinite;
 }
+
 #div2 {
 
-        margin-top: 140px;
-        width: 100px;
-        height: 50px;
-        font-weight: bold;
-        position: absolute;
-        animation: mymove 10s ;
-        animation-iteration-count:infinite;
+    margin-top: 140px;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    position: absolute;
+    animation: mymove 10s;
+    animation-iteration-count: infinite;
 }
 
 #div3 {
@@ -64,33 +93,60 @@
     height: 50px;
     font-weight: bold;
     position: absolute;
-    animation: mymove 10s ;
-    animation-iteration-count:infinite;
+    animation: mymove 10s;
+    animation-iteration-count: infinite;
 }
-.dv{
+
+.dv {
 
     margin-top: 47px;
     width: 100px;
     height: 50px;
     font-weight: bold;
     position: absolute;
-    animation: mymove2 10s ;   
-    animation-iteration-count:infinite;
+    animation: mymove2 10s;
+    animation-iteration-count: infinite;
 }
-#div1 {animation-timing-function: linear;}
-#div2 {animation-timing-function: linear;}
-#div3 {animation-timing-function: linear;}
+
+#div1 {
+    animation-timing-function: linear;
+}
+
+#div2 {
+    animation-timing-function: linear;
+}
+
+#div3 {
+    animation-timing-function: linear;
+}
 
 
 @keyframes mymove {
-    from {left: 0px;}
-    to {left: 1500px;}
-  }
-  @keyframes mymove2 {
-    from {left: 0px;}
-    to {left: 1500px;}
-  }
-  @keyframes mymove3 {
-    from {left: 0px;}
-    to {left: 0px;}
-  }
+    from {
+        left: 0px;
+    }
+
+    to {
+        left: 1500px;
+    }
+}
+
+@keyframes mymove2 {
+    from {
+        left: 0px;
+    }
+
+    to {
+        left: 1500px;
+    }
+}
+
+@keyframes mymove3 {
+    from {
+        left: 0px;
+    }
+
+    to {
+        left: 0px;
+    }
+}
