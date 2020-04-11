@@ -5,12 +5,14 @@ function print(val) {
   document.body.appendChild(el);
 }
 
+const AMOUNT_OF_CHANNELS = 2;
+
 const juegos = document.getElementsByClassName("juego");
 Array.from(juegos).forEach(function (juego) {
-  for (let index = 0; index < 2; index++) {
-    // Add channel
+  // Add channel
+  for (let index = 0; index < AMOUNT_OF_CHANNELS; index++) {
     const canal = document.createElement("div");
-    canal.className = "canal";
+    canal.className = `canal canal_${index}`;
 
     // Add the squere Siluete
     const silueta = document.createElement("div");
@@ -24,6 +26,17 @@ Array.from(juegos).forEach(function (juego) {
 
     juego.appendChild(canal);
   }
+});
+
+Rx.Observable.timer(1000).subscribe((_) => {
+  const canal_test = document.getElementsByClassName("canal_1");
+
+  Array.from(canal_test).forEach(function (chanel) {
+    const image = document.createElement("img");
+    image.src = "azul.png";
+
+    chanel.appendChild(image);
+  });
 });
 
 /* let puntos = 0;
