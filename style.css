@@ -34,7 +34,7 @@
 .cuadrado_musical {
     position: absolute;
     align-self: flex-start;
-    animation: mover_cuadrado 5s;
+    animation: mover_cuadrado 5.55555555s;
     animation-iteration-count: infinite;
     animation-timing-function: linear
 }
@@ -45,7 +45,7 @@
     }
 
     100% {
-        left: 90%;
+        left: 100%;
     }
 }
 

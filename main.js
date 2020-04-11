@@ -1,36 +1,40 @@
-// Only debugging, delete later
-function print(val) {
-  let el = document.createElement("p");
-  el.innerText = val;
-  document.body.appendChild(el);
+const AMOUNT_OF_CHANNELS = 2;
+const TIME_BEFORE_PRESS = 5000; // in miliseconds
+const ERROR_MARGIN = 500; // in miliseconds
+
+function build_play_area() {
+  const juegos = document.getElementsByClassName("juego");
+  Array.from(juegos).forEach(function (juego) {
+    // Add channel
+    for (let index = 0; index < AMOUNT_OF_CHANNELS; index++) {
+      const canal = document.createElement("div");
+      canal.className = `canal canal_${index}`;
+
+      // Add the squere Siluete
+      const silueta = document.createElement("div");
+      silueta.className = "silueta_cuadrado";
+      canal.appendChild(silueta);
+
+      // Add line
+      const linea = document.createElement("hr");
+      linea.className = "linea_guia";
+      canal.appendChild(linea);
+
+      juego.appendChild(canal);
+    }
+  });
 }
 
-const AMOUNT_OF_CHANNELS = 2;
+build_play_area();
 
-const juegos = document.getElementsByClassName("juego");
-Array.from(juegos).forEach(function (juego) {
-  // Add channel
-  for (let index = 0; index < AMOUNT_OF_CHANNELS; index++) {
-    const canal = document.createElement("div");
-    canal.className = `canal canal_${index}`;
+const start_moments = [1000, 1600, 3000, 3630, 4200, 6000];
+const press_moments = start_moments.map((moment) => moment + TIME_BEFORE_PRESS);
 
-    // Add the squere Siluete
-    const silueta = document.createElement("div");
-    silueta.className = "silueta_cuadrado";
-    canal.appendChild(silueta);
+const spawn_times = Rx.Observable.from(start_moments).flatMap((x) =>
+  Rx.Observable.timer(x).map((_) => x)
+);
 
-    // Add line
-    const linea = document.createElement("hr");
-    linea.className = "linea_guia";
-    canal.appendChild(linea);
-
-    juego.appendChild(canal);
-  }
-});
-
-const source_1 = Rx.Observable.interval(1000);
-
-const subscribe_1 = source_1.subscribe((_) => {
+const subscribe = spawn_times.subscribe((x) => {
   const canal_test = document.getElementsByClassName("canal_0");
 
   Array.from(canal_test).forEach(function (chanel) {
@@ -40,7 +44,7 @@ const subscribe_1 = source_1.subscribe((_) => {
 
     chanel.appendChild(image);
 
-    Rx.Observable.timer(10000).subscribe((_) => {
+    Rx.Observable.timer(TIME_BEFORE_PRESS).subscribe((_) => {
       chanel.removeChild(image);
     });
   });
