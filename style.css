@@ -1,18 +1,22 @@
 .juego {
     width: 100%;
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
 }
 
 .canal {
     height: 100px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .silueta_cuadrado {
-    margin-left: 90%;
     position: absolute;
+    align-self: flex-start;
+    margin-left: 89%;
     width: 50px;
     height: 50px;
     display: block;
@@ -25,6 +29,24 @@
     margin-top: 25px;
     margin-bottom: 25px;
     background-color: black;
+}
+
+.cuadrado_musical {
+    position: absolute;
+    align-self: flex-start;
+    animation: mover_cuadrado 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear
+}
+
+@keyframes mover_cuadrado {
+    0% {
+        left: 0%;
+    }
+
+    100% {
+        left: 90%;
+    }
 }
 
 .puntaje {
@@ -62,7 +84,7 @@
     height: 50px;
     display: block;
     border: 1px solid #000000;
-}*/
+}
 
 .di {
 
@@ -130,16 +152,7 @@
         left: 1500px;
     }
 }
-
-@keyframes mymove2 {
-    from {
-        left: 0px;
-    }
-
-    to {
-        left: 1500px;
-    }
-}
+*/
 
 @keyframes mymove3 {
     from {

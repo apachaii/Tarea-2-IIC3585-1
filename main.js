@@ -28,14 +28,21 @@ Array.from(juegos).forEach(function (juego) {
   }
 });
 
-Rx.Observable.timer(1000).subscribe((_) => {
-  const canal_test = document.getElementsByClassName("canal_1");
+const source_1 = Rx.Observable.interval(1000);
+
+const subscribe_1 = source_1.subscribe((_) => {
+  const canal_test = document.getElementsByClassName("canal_0");
 
   Array.from(canal_test).forEach(function (chanel) {
     const image = document.createElement("img");
     image.src = "azul.png";
+    image.className = "cuadrado_musical";
 
     chanel.appendChild(image);
+
+    Rx.Observable.timer(10000).subscribe((_) => {
+      chanel.removeChild(image);
+    });
   });
 });
 
