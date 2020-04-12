@@ -87,7 +87,7 @@ function setCurrentPressEmition(emitArray, changePressCallback) {
     });
 }
 
-function startCirlesSpawn(spawn_moments, chanel, image_location) {
+function startCirlesSpawn(spawn_moments, chanel, color) {
   const spawn_times = Rx.Observable.from(
     spawn_moments
   ).flatMap((spawn_moment) =>
@@ -98,17 +98,30 @@ function startCirlesSpawn(spawn_moments, chanel, image_location) {
     const canal_test = document.getElementsByClassName(chanel);
 
     Array.from(canal_test).forEach(function (chanel) {
-      const image = document.createElement("img");
-      image.src = image_location;
+      const colored_square = document.createElement("div");
 
       const press_moment = spawn_moment + TIME_BEFORE_PRESS;
-      image.className = `cuadrado_musical ${press_moment}`;
+      colored_square.className = `cuadrado_musical ${press_moment} ${color}`;
 
-      chanel.appendChild(image);
+      chanel.appendChild(colored_square);
+
+      Rx.Observable.timer(TIME_BEFORE_PRESS - ERROR_MARGIN).subscribe((_) => {
+        if (colored_square.parentNode) {
+          const star_paragraph = document.createElement("p");
+          star_paragraph.innerText = "\u{2726}";
+          colored_square.appendChild(star_paragraph);
+        }
+      });
+
+      Rx.Observable.timer(TIME_BEFORE_PRESS + ERROR_MARGIN).subscribe((_) => {
+        if (colored_square.parentNode) {
+          colored_square.textContent = "";
+        }
+      });
 
       Rx.Observable.timer(TIME_BEFORE_DISSAPEAR).subscribe((_) => {
-        if (image.parentNode) {
-          image.parentNode.removeChild(image);
+        if (colored_square.parentNode) {
+          colored_square.parentNode.removeChild(colored_square);
         }
       });
     });
@@ -227,10 +240,10 @@ function rand(from, to) {
 // inc:      distance between each random number
 // amount:   total number of random numbers
 function spacedRandArray(from, to, inc, amount) {
-  var retArray = [rand(from, to)]; // sets the first element
-  var temp = null;
+  let retArray = [rand(from, to)]; // sets the first element
+  let temp = null;
 
-  for (var x = 0; x < amount - 1; x++) {
+  for (let x = 0; x < amount - 1; x++) {
     do {
       temp = rand(from, to);
     } while (Math.abs(temp - retArray[x]) <= inc);
@@ -239,6 +252,10 @@ function spacedRandArray(from, to, inc, amount) {
   }
 
   return retArray;
+}
+
+function compareFunction(a, b) {
+  return a - b;
 }
 
 const play_button = document.getElementById("play");
@@ -263,18 +280,20 @@ function start_game() {
     Math.ceil(duration) * AVERAGE_GREEN_BY_SECOND
   );
 
+  console.log(duration_in_milliseconds, ERROR_MARGIN, blue_square_amout);
+
   let spawn_moments_blue = spacedRandArray(
     0,
     duration_in_milliseconds,
     ERROR_MARGIN * 2,
     blue_square_amout
-  );
+  ).sort(compareFunction);
   let spawn_moments_green = spacedRandArray(
     0,
     duration_in_milliseconds,
     ERROR_MARGIN * 2,
     green_square_amout
-  );
+  ).sort(compareFunction);
 
   // Set the starts
   const blue_emit_array = getPressEmitArray(spawn_moments_blue);
@@ -284,8 +303,8 @@ function start_game() {
   setCurrentPressEmition(green_emit_array, changeCurrentGreenPress);
 
   // Spawn the circles
-  startCirlesSpawn(spawn_moments_blue, "canal_0", "azul.png");
-  startCirlesSpawn(spawn_moments_green, "canal_1", "verde.png");
+  startCirlesSpawn(spawn_moments_blue, "canal_0", "azul");
+  startCirlesSpawn(spawn_moments_green, "canal_1", "verde");
 
   // Start music
   Rx.Observable.timer(TIME_BEFORE_PRESS).subscribe((_) => {
