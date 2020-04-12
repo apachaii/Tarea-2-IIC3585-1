@@ -13,6 +13,11 @@ const SECOND_PLAYER_GREEN = "m";
 const FIRST_POINTS_TEXT = "Puntos jugador 1:";
 const SECOND_POINTS_TEXT = "Puntos jugador 2:";
 
+const key_text = {
+  jugador_1: [FIRST_PLAYER_BLUE, FIRST_PLAYER_GREEN],
+  jugador_2: [SECOND_PLAYER_BLUE, SECOND_PLAYER_GREEN],
+};
+
 function build_play_area() {
   const juegos = document.getElementsByClassName("juego");
   Array.from(juegos).forEach(function (juego) {
@@ -25,6 +30,11 @@ function build_play_area() {
       const silueta = document.createElement("div");
       silueta.className = "silueta_cuadrado";
       canal.appendChild(silueta);
+
+      // The key guide
+      const guide_text = document.createElement("p");
+      guide_text.innerText = key_text[juego.classList[1]][index];
+      silueta.appendChild(guide_text);
 
       // Add line
       const linea = document.createElement("hr");
